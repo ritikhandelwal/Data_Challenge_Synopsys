@@ -2,10 +2,9 @@ import unittest
 from Data_Challenge_function import extract_features  # Assuming your function is here
 
 class TestFeatureExtraction(unittest.TestCase):
-
-  def test_extract_features(self):
+    def test_extract_features(self):
         # Create mock audio data
-        audio = [0.1, 0.2, 0.3, 0.4, 0.5]  # Example audio data
+        audio = np.array([0.1, 0.2, 0.3, 0.4, 0.5])  # Convert list to numpy array
         sr = 22050  # Example sampling rate
         
         features = extract_features(audio, sr)
