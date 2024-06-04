@@ -3,14 +3,16 @@ from Data_Challenge_function import extract_features  # Assuming your function i
 
 class TestFeatureExtraction(unittest.TestCase):
 
-  def test_empty_data(self):
-    """Test if the function handles empty audio data."""
-    default_sr = 22050  # Example default sample rate
-    features = extract_features(None, default_sr)  # Pass None and default sr
-
-    # Assert expected behavior for empty data
-    self.assertIsInstance(features, dict)  # Check if it returns a dictionary
-    self.assertEqual(features, {})  # Check if the dictionary is empty
+  def test_extract_features(self):
+        # Create mock audio data
+        audio = [0.1, 0.2, 0.3, 0.4, 0.5]  # Example audio data
+        sr = 22050  # Example sampling rate
+        
+        features = extract_features(audio, sr)
+        
+        # Assert that the output has the expected shape or values
+        self.assertEqual(len(features), 15)  # Ensure correct number of features
+        # Add more assertions as needed
 
 if __name__ == "__main__":
   unittest.main()
