@@ -4,15 +4,12 @@ from Data_Challenge_function import extract_features  # Assuming your function i
 
 class TestFeatureExtraction(unittest.TestCase):
     def test_extract_features(self):
-        # Create mock audio data
-        audio = np.array([0.1, 0.2, 0.3, 0.4, 0.5])  # Convert list to numpy array
-        sr = 22050  # Example sampling rate
+        
+        audio = np.array([0.1, 0.2, 0.3, 0.4, 0.5])  
+        sr = 22050  
         
         features = extract_features(audio, sr)
-        
-        # Assert that the output has the expected shape or values
-        self.assertEqual(len(features), 15)  # Ensure correct number of features
-        # Add more assertions as needed
+        self.assertEqual(len(features), 15)  
 
 if __name__ == "__main__":
   unittest.main()
