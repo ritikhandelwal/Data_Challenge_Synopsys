@@ -1,4 +1,5 @@
 import unittest
+import numpy as np
 from Data_Challenge_function import extract_features  # Assuming your function is here
 
 class TestFeatureExtraction(unittest.TestCase):
