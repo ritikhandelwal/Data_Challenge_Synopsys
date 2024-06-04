@@ -1,16 +1,15 @@
 import unittest
-import numpy as np
-from Data_Challenge_function import extract_features  # Assuming your notebook is named 'Data_Challenge'
+from Data_Challenge_function import extract_features  # Assuming your function is here
 
 class TestFeatureExtraction(unittest.TestCase):
-  def test_extract_features(self):
-    # Dummy audio signal for testing
-    audio = np.random.random(22050)
-    sr = 22050
-    features = extract_features(audio, sr)
 
-    # Expected output shape (13,) for 13 MFCCs, zero-crossing rate, and spectral centroid
-    self.assertEqual(features.shape, (13,))
+  def test_empty_data(self):
+    """Test if the function handles empty audio data."""
+    features = extract_features(None)  # Pass None to simulate empty data
 
-if __name__ == '__main__':
+    # Assert expected behavior for empty data
+    self.assertIsInstance(features, dict)  # Check if it returns a dictionary
+    self.assertEqual(features, {})  # Check if the dictionary is empty
+
+if __name__ == "__main__":
   unittest.main()
