@@ -31,34 +31,3 @@ def extract_features(audio, sr):
     spectral_centroid = np.mean(librosa.feature.spectral_centroid(y=audio, sr=sr))
     
     return np.hstack([mfccs, zcr, spectral_centroid])
-
-# Extract features for training and testing sets
-X_train_features = np.array([extract_features(audio, sr=44100) for audio in X_train])
-X_test_features = np.array([extract_features(audio, sr=44100) for audio in X_test])
-
-# Standardize the features
-scaler = StandardScaler()
-X_train_features = scaler.fit_transform(X_train_features)
-X_test_features = scaler.transform(X_test_features)
-
-# Train a linear SVM
-svm_model = SVC(kernel='linear', random_state=42)
-svm_model.fit(X_train_features, y_train)
-
-# Predict on test set
-y_pred_svm = svm_model.predict(X_test_features)
-
-# Evaluate the model
-print("Linear SVM Classification Report:")
-print(classification_report(y_test, y_pred_svm))
-
-# Train a Random Forest classifier
-rf_model = RandomForestClassifier(random_state=42)
-rf_model.fit(X_train_features, y_train)
-
-# Predict on test set
-y_pred_rf = rf_model.predict(X_test_features)
-
-# Evaluate the model
-print("Random Forest Classification Report:")
-print(classification_report(y_test, y_pred_rf))
