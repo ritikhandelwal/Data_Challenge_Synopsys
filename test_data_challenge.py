@@ -5,7 +5,8 @@ class TestFeatureExtraction(unittest.TestCase):
 
   def test_empty_data(self):
     """Test if the function handles empty audio data."""
-    features = extract_features(None)  # Pass None to simulate empty data
+    default_sr = 22050  # Example default sample rate
+    features = extract_features(None, default_sr)  # Pass None and default sr
 
     # Assert expected behavior for empty data
     self.assertIsInstance(features, dict)  # Check if it returns a dictionary
@@ -13,3 +14,4 @@ class TestFeatureExtraction(unittest.TestCase):
 
 if __name__ == "__main__":
   unittest.main()
+
