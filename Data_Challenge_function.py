@@ -1,4 +1,23 @@
-# Function to load audio files and extract labels
+import os
+import numpy as np
+import librosa
+import librosa.display
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Paths to data folders
+data_folders = {
+    'air_conditioner': 'E:/Synopsys_Data_Challenge/data/air_conditioner',
+    'car_horn': 'E:/Synopsys_Data_Challenge/data/car_horn',
+    'engine_idling': 'E:/Synopsys_Data_Challenge/data/engine_idling',
+    'siren': 'E:/Synopsys_Data_Challenge/data/siren'
+}
+
 def load_audio_files(data_folders):
     X, y = [], []
     for label, folder in data_folders.items():
