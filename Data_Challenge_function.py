@@ -10,30 +10,13 @@ from sklearn.metrics import classification_report, confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Paths to data folders
-data_folders = {
-    'air_conditioner': 'E:/Synopsys_Data_Challenge/data/air_conditioner',
-    'car_horn': 'E:/Synopsys_Data_Challenge/data/car_horn',
-    'engine_idling': 'E:/Synopsys_Data_Challenge/data/engine_idling',
-    'siren': 'E:/Synopsys_Data_Challenge/data/siren'
-}
-
-def load_audio_files(data_folders):
-    X, y = [], []
-    for label, folder in data_folders.items():
-        for file in os.listdir(folder):
-            if file.endswith('.wav'):
-                filepath = os.path.join(folder, file)
-                audio, sr = librosa.load(filepath, sr=None)
-                X.append(audio)
-                y.append(label)
-    return X, y
-
-# Load audio files
-X, y = load_audio_files(data_folders)
-
-# Split data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# # Paths to data folders
+# data_folders = {
+#     'air_conditioner': 'E:/Synopsys_Data_Challenge/data/air_conditioner',
+#     'car_horn': 'E:/Synopsys_Data_Challenge/data/car_horn',
+#     'engine_idling': 'E:/Synopsys_Data_Challenge/data/engine_idling',
+#     'siren': 'E:/Synopsys_Data_Challenge/data/siren'
+# }
 
 # Feature extraction function
 def extract_features(audio, sr):
@@ -79,19 +62,3 @@ y_pred_rf = rf_model.predict(X_test_features)
 # Evaluate the model
 print("Random Forest Classification Report:")
 print(classification_report(y_test, y_pred_rf))
-
-# Plot confusion matrix
-def plot_confusion_matrix(y_true, y_pred, title):
-    cm = confusion_matrix(y_true, y_pred)
-    plt.figure(figsize=(10, 7))
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
-    plt.title(title)
-    plt.xlabel('Predicted')
-    plt.ylabel('True')
-    plt.show()
-
-# Confusion matrix for SVM
-plot_confusion_matrix(y_test, y_pred_svm, "Confusion Matrix - Linear SVM")
-
-# Confusion matrix for Random Forest
-plot_confusion_matrix(y_test, y_pred_rf, "Confusion Matrix - Random Forest")
